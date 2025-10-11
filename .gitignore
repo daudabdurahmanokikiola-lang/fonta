@@ -1,0 +1,311 @@
+# ===========================================
+# FONTA AI STUDY COMPANION - .gitignore
+# ===========================================
+
+# ===========================================
+# NODE.JS / FRONTEND
+# ===========================================
+frontend/node_modules/
+frontend/dist/
+frontend/build/
+frontend/.next/
+frontend/.nuxt/
+frontend/.output/
+frontend/.vite/
+frontend/.cache/
+
+# Frontend dependencies
+frontend/package-lock.json
+frontend/yarn.lock
+frontend/pnpm-lock.yaml
+
+# ===========================================
+# PYTHON / BACKEND
+# ===========================================
+backend/venv/
+backend/env/
+backend/.venv/
+backend/.env/
+backend/__pycache__/
+backend/*.pyc
+backend/*.pyo
+backend/*.pyd
+backend/.Python
+backend/pip-log.txt
+backend/pip-delete-this-directory.txt
+backend/.coverage
+backend/.pytest_cache/
+backend/htmlcov/
+backend/.tox/
+backend/.mypy_cache/
+backend/.dmypy.json
+backend/dmypy.json
+
+# Python virtual environments
+venv/
+env/
+ENV/
+env.bak/
+venv.bak/
+
+# ===========================================
+# ENVIRONMENT VARIABLES
+# ===========================================
+.env
+.env.local
+.env.development.local
+.env.test.local
+.env.production.local
+frontend/.env
+frontend/.env.local
+frontend/.env.development.local
+frontend/.env.test.local
+frontend/.env.production.local
+backend/.env
+backend/.env.local
+backend/.env.development.local
+backend/.env.test.local
+backend/.env.production.local
+
+# ===========================================
+# DATABASES
+# ===========================================
+*.db
+*.sqlite
+*.sqlite3
+*.db-journal
+*.db-wal
+*.db-shm
+
+# MongoDB
+data/
+mongodb_data/
+
+# ===========================================
+# LOGS
+# ===========================================
+logs/
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+lerna-debug.log*
+.pnpm-debug.log*
+
+# ===========================================
+# RUNTIME DATA
+# ===========================================
+pids/
+*.pid
+*.seed
+*.pid.lock
+
+# ===========================================
+# COVERAGE DIRECTORY USED BY TOOLS
+# ===========================================
+coverage/
+*.lcov
+.nyc_output/
+
+# ===========================================
+# DEPENDENCY DIRECTORIES
+# ===========================================
+jspm_packages/
+
+# ===========================================
+# OPTIONAL NPM CACHE DIRECTORY
+# ===========================================
+.npm
+
+# ===========================================
+# OPTIONAL ESLINT CACHE
+# ===========================================
+.eslintcache
+
+# ===========================================
+# MICROBUNDLE CACHE
+# ===========================================
+.rpt2_cache/
+.rts2_cache_cjs/
+.rts2_cache_es/
+.rts2_cache_umd/
+
+# ===========================================
+# OPTIONAL REPL HISTORY
+# ===========================================
+.node_repl_history
+
+# ===========================================
+# OUTPUT OF 'NPM PACK'
+# ===========================================
+*.tgz
+
+# ===========================================
+# YARN INTEGRITY FILE
+# ===========================================
+.yarn-integrity
+
+# ===========================================
+# PARCEL-BUNDLER CACHE
+# ===========================================
+.cache
+.parcel-cache
+
+# ===========================================
+# NEXT.JS BUILD OUTPUT
+# ===========================================
+.next
+out
+
+# ===========================================
+# NUXT.JS BUILD / GENERATE OUTPUT
+# ===========================================
+.nuxt
+dist
+
+# ===========================================
+# GATSBY FILES
+# ===========================================
+.cache/
+public
+
+# ===========================================
+# STORYBOOK BUILD OUTPUTS
+# ===========================================
+.out
+.storybook-out
+
+# ===========================================
+# TEMPORARY FOLDERS
+# ===========================================
+tmp/
+temp/
+
+# ===========================================
+# IDE / EDITOR FILES
+# ===========================================
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# ===========================================
+# OS GENERATED FILES
+# ===========================================
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db
+Desktop.ini
+
+# ===========================================
+# WINDOWS
+# ===========================================
+Thumbs.db
+ehthumbs.db
+Desktop.ini
+$RECYCLE.BIN/
+
+# ===========================================
+# MACOS
+# ===========================================
+.DS_Store
+.AppleDouble
+.LSOverride
+Icon
+._*
+.DocumentRevisions-V100
+.fseventsd
+.Spotlight-V100
+.TemporaryItems
+.Trashes
+.VolumeIcon.icns
+.com.apple.timemachine.donotpresent
+
+# ===========================================
+# LINUX
+# ===========================================
+*~
+.fuse_hidden*
+.directory
+.Trash-*
+.nfs*
+
+# ===========================================
+# JUPYTER NOTEBOOK
+# ===========================================
+.ipynb_checkpoints
+
+# ===========================================
+# PYCHARM
+# ===========================================
+.idea/
+
+# ===========================================
+# VSCODE
+# ===========================================
+.vscode/
+
+# ===========================================
+# DOCKER
+# ===========================================
+.dockerignore
+Dockerfile
+docker-compose.yml
+docker-compose.yaml
+
+# ===========================================
+# AI / ML MODELS
+# ===========================================
+*.pkl
+*.joblib
+*.h5
+*.hdf5
+*.model
+models/
+checkpoints/
+
+# ===========================================
+# DOCUMENTATION BUILD
+# ===========================================
+docs/_build/
+site/
+
+# ===========================================
+# TESTING
+# ===========================================
+.coverage
+.pytest_cache/
+.tox/
+htmlcov/
+
+# ===========================================
+# BACKUP FILES
+# ===========================================
+*.bak
+*.backup
+*.old
+*.orig
+*.rej
+
+# ===========================================
+# COMPRESSED FILES
+# ===========================================
+*.7z
+*.dmg
+*.gz
+*.iso
+*.jar
+*.rar
+*.tar
+*.zip
+
+# ===========================================
+# PROJECT SPECIFIC
+# ===========================================
+# Remove any project-specific files that shouldn't be tracked
+structure.txt
