@@ -27,7 +27,6 @@ export function PaymentModal({ isOpen, onClose, onSuccess, userEmail }: PaymentM
       email: userEmail,
       amount: 80000, // ₦800 in kobo
       currency: 'NGN',
-      ref: `edumate_${Date.now()}`,
       ref: `fonta_${Date.now()}`,
       metadata: {
         custom_fields: [

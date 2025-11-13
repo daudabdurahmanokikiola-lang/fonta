@@ -4,4 +4,7 @@ pymongo
 motor
 python-dotenv
 pydantic
+google-generativeai
+PyMuPDF
+python-multipart
 

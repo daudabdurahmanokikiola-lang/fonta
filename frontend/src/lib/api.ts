@@ -156,7 +156,7 @@ class ApiService {
     });
   }
 
-  async getHomeworkHelp(userId: string): Promise<ApiResponse<HomeworkHelp[]>> {
+  async getHomeworkHistory(userId: string): Promise<ApiResponse<HomeworkHelp[]>> {
     return this.request(`/api/homework?user_id=${userId}`);
   }
 

@@ -15,29 +15,34 @@ Developed during the **Vibe Coding Hackathon 2025**, Fonta aims to make AI-drive
 
 ---
 
-## ✨ **Core Features (Planned & Existing)**
+## ✨ **Core Features**
 
-### 🧩 1. AI Note-to-Quiz Generator
+### 📘 1. Advanced PDF Summarizer (NEW)
 
-* Upload PDFs or paste text notes
-* Automatically generate **multiple-choice** and **short-answer** questions
-* Include intelligent explanations for each question
+* Upload PDFs up to 400 pages
+* Context-preserving chunking with overlap
+* Extracts verbatim definitions from source material
+* Generates key bullet points (max 30)
+* Creates question-style self-test prompts
+* Preserves academic terminology and domain-specific language
 
-### 📘 2. AI Digital Library Summarizer
+### 🧩 2. Comprehensive Quiz Generator (NEW)
 
-* Convert long notes into concise summaries
-* Save and retrieve study summaries for revision
+* Generates 50 high-quality questions per quiz
+  * 35 multiple-choice questions (MCQs)
+  * 15 short-answer questions
+* Pagination: 5 questions per page (10 pages total)
+* Mix of easy/medium/hard difficulty levels
+* Intelligent distractors for MCQs based on common student errors
+* Free users: 2 quiz attempts (upgradable to unlimited)
 
-### 🧮 3. AI Homework Helper
+### 🧮 3. AI Homework Helper (NEW)
 
-* Step-by-step reasoning for Math, Science, and Essay topics
-* Encourages understanding rather than rote memorization
-
-### 🧠 4. Next-Phase Improvements (Planned)
-
-* **Custom MongoDB Database** for user data and summaries
-* **In-house AI logic** (no third-party APIs) for question generation and summarization
-* **Enhanced backend architecture** with modular AI integration
+* Step-by-step solutions with detailed reasoning
+* Support for Math, Science, Essay Writing, and General topics
+* Includes common mistakes and tips
+* Practice question recommendations
+* Nigerian educational context integration
 
 ---
 
@@ -67,23 +72,26 @@ project/
 
 ### **AI Logic Layer (Python)**
 
-* Built internally for summarization and quiz generation
-* Uses NLP techniques and model fine-tuning (no external APIs)
-* Integrated through FastAPI endpoints
+* Google Gemini AI integration for advanced language understanding
+* Context-preserving prompts for academic content
+* Chunking strategy for large documents
+* Verbatim definition extraction
+* Intelligent quiz generation with difficulty calibration
 
 ---
 
 ## ⚙️ **Tech Stack**
 
-| Layer           | Technology                 |
-| --------------- | -------------------------- |
-| **Frontend**    | React, Vite, TypeScript    |
-| **Styling**     | Tailwind CSS               |
-| **Backend**     | Python, FastAPI            |
-| **Database**    | MongoDB                    |
-| **AI Logic**    | Custom NLP Models (Python) |
-| **File Upload** | React Dropzone             |
-| **Icons**       | Lucide React               |
+| Layer           | Technology                      |
+| --------------- | ------------------------------- |
+| **Frontend**    | React, Vite, TypeScript         |
+| **Styling**     | Tailwind CSS                    |
+| **Backend**     | Python, FastAPI                 |
+| **Database**    | MongoDB Atlas                   |
+| **AI Engine**   | Google Gemini Pro               |
+| **PDF Processing** | PyMuPDF (fitz)               |
+| **File Upload** | React Dropzone, FormData        |
+| **Icons**       | Lucide React                    |
 
 ---
 
@@ -116,16 +124,27 @@ uvicorn app:app --reload
 
 ---
 
-### 🗄️ Database Setup (MongoDB)
+### 🗄️ Database & AI Setup
 
-1. Install [MongoDB Community Server](https://www.mongodb.com/try/download/community) or use [MongoDB Atlas](https://www.mongodb.com/atlas).
+1. **MongoDB Setup**
+   - Install [MongoDB Community Server](https://www.mongodb.com/try/download/community) or use [MongoDB Atlas](https://www.mongodb.com/atlas)
+   - Create a database named **fonta_ai_db**
+   - Collections will be created automatically: `users`, `summaries`, `quizzes`, `homework_requests`
 
-2. Create a database named **fonta_ai_db**.
+2. **Google Gemini API Setup**
+   - Visit [Google AI Studio](https://makersuite.google.com/app/apikey)
+   - Create a new API key for Gemini Pro
+   - Copy the API key for configuration
 
-3. Add your connection string to an `.env` file in the backend directory:
+3. **Environment Configuration**
+   - Copy `backend/.env.example` to `backend/.env`
+   - Configure the following:
 
    ```
-   MONGO_URI=mongodb://localhost:27017/fonta_ai_db
+   MONGO_URI=mongodb://localhost:27017
+   DATABASE_NAME=fonta_ai_db
+   GEMINI_API_KEY=your_gemini_api_key_here
+   LOG_LEVEL=INFO
    ```
 
 4. The backend will connect automatically once configured.
@@ -200,13 +219,59 @@ Each member works within their specialization while maintaining code harmony and
 
 ---
 
+## 🔌 **API Endpoints**
+
+### Summarization
+- **POST /api/summarize-pdf**
+  - Upload PDF file (up to 400 pages)
+  - Returns: verbatim definitions, key bullets, question-style prompts
+  - Response: `{ summary_id, file_name, pages, total_words, summary }`
+
+- **GET /api/summaries/{summary_id}**
+  - Retrieve a specific summary
+
+- **GET /api/summaries?user_id={user_id}**
+  - List all summaries for a user
+
+### Quiz Generation
+- **POST /api/generate-quiz**
+  - Body: `{ user_id, summary_id }`
+  - Generates 50 questions (35 MCQ + 15 short answer)
+  - Returns: `{ quiz_id, total_questions, total_pages }`
+  - Error 402: Free user attempt limit exceeded
+
+- **GET /api/quiz/{quiz_id}?page={n}**
+  - Get paginated quiz questions (5 per page)
+  - Returns: `{ quiz_id, page, total_pages, questions }`
+
+- **GET /api/quizzes?user_id={user_id}**
+  - List all quizzes for a user
+
+### Homework Help
+- **POST /api/homework-helper**
+  - Body: `{ user_id, question, topic?, difficulty? }`
+  - Returns: `{ request_id, final_answer, step_by_step, tips }`
+
+- **GET /api/homework/{request_id}**
+  - Retrieve specific homework help
+
+- **GET /api/homework?user_id={user_id}**
+  - List homework help history
+
+### Health & Status
+- **GET /api/health**
+  - Check system health (database, API, Gemini AI)
+
+---
+
 ## 🔮 **Future Roadmap**
 
-* [ ] Implement full MongoDB integration for users and study data
-* [ ] Replace all third-party AI services with local AI modules
+* [x] Implement full MongoDB integration for users and study data
+* [x] Google Gemini AI integration for advanced language understanding
 * [ ] Introduce speech and image input processing
 * [ ] Develop a chat-style interface for real-time study assistance
 * [ ] Expand subject coverage and analytics dashboard
+* [ ] Add collaborative study features
 
 ---
 
@@ -228,12 +293,18 @@ frontend/
   └── ...
 
 backend/
-  ├── app.py
-  ├── requirements.txt
+  ├── app.py                    → Main FastAPI application
+  ├── requirements.txt          → Python dependencies
+  ├── .env.example              → Environment configuration template
   ├── routes/
+  │   ├── summarize.py          → PDF summarization endpoints
+  │   ├── quiz.py               → Quiz generation endpoints
+  │   └── homework.py           → Homework helper endpoints
   ├── models/
-  │   └── ai/      → AI logic scripts go here
+  │   └── gemini_ai.py          → Gemini AI integration logic
   ├── utils/
+  │   ├── db.py                 → MongoDB connection manager
+  │   └── pdf_processor.py      → PDF extraction and chunking
   └── __init__.py
 
 .gitignore
@@ -273,8 +344,12 @@ Special thanks to **Vibe Coding**, **PLP Academy**, and our mentors for the oppo
 
 ## ⚡ **Status**
 
-✅ *Repository structured and collaboration-ready*
-📅 *Phase:* System organization complete — implementation phase begins next
+✅ **Backend Enhanced with Gemini AI Integration**
+✅ **MongoDB Atlas Integration Complete**
+✅ **Advanced PDF Summarization (400 pages, context-preserving)**
+✅ **50-Question Quiz Generator with Pagination**
+✅ **Step-by-Step Homework Helper**
+📅 **Phase:** Core AI features implemented — ready for frontend integration and testing
 
 ---
 

@@ -382,7 +382,6 @@ export function SummarizerTab({ user, profile, onUsageUpdate, onUpgrade }: Summa
             <textarea
               value={input}
               onChange={(e) => setInput(e.target.value)}
-              placeholder={canUse ? "Paste your notes here or upload a file..." : "Upgrade to continue using EduMate"}
               placeholder={canUse ? "Paste your notes here or upload a file..." : "Upgrade to continue using FONTA"}
               className="w-full border border-gray-300 rounded-xl px-4 py-3 focus:outline-none focus:ring-2 focus:ring-blue-500 disabled:opacity-50 resize-none"
               rows={3}
